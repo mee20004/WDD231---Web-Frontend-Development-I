@@ -1,8 +1,26 @@
-import { getParkData } from "./parkService.mjs";
+import { getParkData, getInfoLinks } from "./parkService.mjs";
 
-const parkData = getParkData();
+const parkInfoLinks = [
+  {
+    name: "Current Conditions &#x203A;",
+    link: "conditions.html",
+    image: "",
+    description: "See what conditions to expect in the park before leaving on your trip!"
+  },
+  {
+    name: "Fees and Passes &#x203A;",
+    link: "fees.html",
+    image: "", 
+    description: "Learn about the fees and passes that are available."
+  },
+  {
+    name: "Visitor Centers &#x203A;",
+    link: "visitor_centers.html",
+    image: "",
+    description: "Learn about the visitor centers in the park."
+  }
+];
 
-// Header
 function parkInfoTemplate(info) {
   return `
     <a href="/" class="hero-banner__title">${info.name}</a>
@@ -14,25 +32,20 @@ function parkInfoTemplate(info) {
 }
 
 function setHeaderInfo(data) {
-  // Disclaimer link
   const disclaimerLink = document.querySelector(".disclaimer a");
   disclaimerLink.href = data.url;
   disclaimerLink.textContent = data.fullName;
 
-  // Page title
   document.querySelector("head > title").textContent = data.fullName;
 
-  // Hero image
   const heroImage = document.querySelector(".hero-banner img");
   heroImage.src = data.images[0].url;
   heroImage.alt = data.images[0].altText || data.fullName;
 
-  // Hero text
   const heroContent = document.querySelector(".hero-banner__content");
   heroContent.innerHTML = parkInfoTemplate(data);
 }
 
-// Intro
 function setParkIntro(data) {
   const introEl = document.querySelector(".intro");
   introEl.innerHTML = `
@@ -41,7 +54,6 @@ function setParkIntro(data) {
   `;
 }
 
-// Info Cards
 function mediaCardTemplate(info) {
   return `
     <div class="media-card">
@@ -54,47 +66,15 @@ function mediaCardTemplate(info) {
   `;
 }
 
-const parkInfoLinks = [
-  {
-    name: "Current Conditions &#x203A;",
-    link: "conditions.html",
-    image: parkData.images[2].url,
-    description:
-      "See what conditions to expect in the park before leaving on your trip!"
-  },
-  {
-    name: "Fees and Passes &#x203A;",
-    link: "fees.html",
-    image: parkData.images[3].url,
-    description: "Learn about the fees and passes that are available."
-  },
-  {
-    name: "Visitor Centers &#x203A;",
-    link: "visitor_centers.html",
-    image: parkData.images[9].url,
-    description: "Learn about the visitor centers in the park."
-  }
-];
-
 function setParkInfoLinks(data) {
   const infoEl = document.querySelector(".info");
   const html = data.map(mediaCardTemplate);
   infoEl.innerHTML = html.join("");
 }
 
-// Footer
-function getMailingAddress(addresses) {
-  return addresses.find((address) => address.type === "Mailing");
-}
-
-function getVoicePhone(numbers) {
-  const voice = numbers.find((number) => number.type === "Voice");
-  return voice.phoneNumber;
-}
-
 function footerTemplate(info) {
-  const mailing = getMailingAddress(info.addresses);
-  const voice = getVoicePhone(info.contacts.phoneNumbers);
+  const mailing = info.addresses.find((address) => address.type === "Mailing");
+  const voice = info.contacts.phoneNumbers.find((n) => n.type === "Voice").phoneNumber;
 
   return `
     <section class="contact">
@@ -115,8 +95,15 @@ function setFooter(data) {
   footerEl.innerHTML = footerTemplate(data);
 }
 
-// Run
-setHeaderInfo(parkData);
-setParkIntro(parkData);
-setParkInfoLinks(parkInfoLinks);
-setFooter(parkData);
+async function init() {
+  const parkData = await getParkData("yell"); 
+  
+  const updatedLinks = getInfoLinks(parkData.images, parkInfoLinks);
+  
+  setHeaderInfo(parkData);
+  setParkIntro(parkData);
+  setParkInfoLinks(updatedLinks);
+  setFooter(parkData);
+}
+
+init();

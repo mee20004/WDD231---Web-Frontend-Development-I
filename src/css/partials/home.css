@@ -1,0 +1,37 @@
+main {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem 1rem;
+}
+
+.intro {
+  max-width: 800px;
+  margin-bottom: 3rem;
+}
+.intro h1 {
+  font-size: 2.2rem;
+  margin-bottom: 1rem;
+  color: var(--bs-black);
+}
+.intro p {
+  font-size: 1rem;
+  color: var(--bs-grey-2);
+}
+
+.info {
+  display: grid;
+  gap: 2rem;
+}
+
+/* RESPONSIVE STYLES */
+@media (min-width: 768px) {
+  .hero-banner__title {
+    font-size: 2.4rem;
+  }
+  .info {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  .media-card__img {
+    height: 180px;
+  }
+}
