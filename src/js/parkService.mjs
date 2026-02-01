@@ -41,6 +41,6 @@ export async function getVisitorCenterData(parkCode = "yell") {
 
 console.log("My API Key is:", apiKey);
 
-
+export { getJson };
 
 

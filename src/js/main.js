@@ -1,4 +1,4 @@
-import { getParkData, getInfoLinks } from "./parkService.mjs";
+import { getParkData, getInfoLinks, getJson} from "./parkService.mjs";
 
 const parkInfoLinks = [
   {
@@ -107,3 +107,20 @@ async function init() {
 }
 
 init();
+
+
+async function renderClimbingList() {
+  const listEl = document.getElementById("outputList");
+  if (!listEl) return;
+
+  const data = await getJson("activities/parks?q=climbing");
+  const parks = data.data[0].parks;
+
+  listEl.innerHTML = parks
+    .map(
+      (park) => `<li><a href="${park.url}" target="_blank">${park.fullName}</a> (${park.states})</li>`
+    )
+    .join("");
+}
+
+renderClimbingList();
