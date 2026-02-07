@@ -21,8 +21,17 @@ async function getJson(url) {
 
 export async function getParkData(parkCode = "yell") {
   const parkData = await getJson(`parks?parkCode=${parkCode}`);
-  
   return parkData.data[0];
+}
+
+export async function getVisitorCenterData(parkCode = "yell") {
+  const data = await getJson(`visitorcenters?parkCode=${parkCode}`);
+  return data.data;
+}
+
+export async function getParkAlerts(parkCode = "yell") {
+  const data = await getJson(`alerts?parkCode=${parkCode}`);
+  return data.data;
 }
 
 export function getInfoLinks(images, parkInfoLinks) {
@@ -34,13 +43,4 @@ export function getInfoLinks(images, parkInfoLinks) {
   });
 }
 
-export async function getVisitorCenterData(parkCode = "yell") {
-  const data = await getJson(`visitorcenters?parkCode=${parkCode}`);
-  return data.data;
-}
-
-console.log("My API Key is:", apiKey);
-
 export { getJson };
-
-

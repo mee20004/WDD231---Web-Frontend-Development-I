@@ -33,3 +33,9 @@ a:hover {
   top: 2px;
   z-index: 9999;
 }
+
+details {
+  padding: 1rem;
+  border: 1px solid var(--bs-grey-3);
+  border-radius: 5px;
+}
