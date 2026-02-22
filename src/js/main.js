@@ -1,4 +1,4 @@
-import { getParkData, getInfoLinks, getJson} from "./parkService.mjs";
+import { getParkData, getInfoLinks, getJson } from "./parkService.mjs";
 
 const parkInfoLinks = [
   {
@@ -10,7 +10,7 @@ const parkInfoLinks = [
   {
     name: "Fees and Passes &#x203A;",
     link: "fees.html",
-    image: "", 
+    image: "",
     description: "Learn about the fees and passes that are available."
   },
   {
@@ -35,23 +35,22 @@ function setHeaderInfo(data) {
   const disclaimerLink = document.querySelector(".disclaimer a");
   disclaimerLink.href = data.url;
   disclaimerLink.textContent = data.fullName;
-
   document.querySelector("head > title").textContent = data.fullName;
-
   const heroImage = document.querySelector(".hero-banner img");
   heroImage.src = data.images[0].url;
   heroImage.alt = data.images[0].altText || data.fullName;
-
   const heroContent = document.querySelector(".hero-banner__content");
   heroContent.innerHTML = parkInfoTemplate(data);
 }
 
 function setParkIntro(data) {
   const introEl = document.querySelector(".intro");
-  introEl.innerHTML = `
-    <h1>${data.fullName}</h1>
-    <p>${data.description}</p>
-  `;
+  if (introEl) {
+    introEl.innerHTML = `
+      <h1>${data.fullName}</h1>
+      <p>${data.description}</p>
+    `;
+  }
 }
 
 function mediaCardTemplate(info) {
@@ -68,14 +67,14 @@ function mediaCardTemplate(info) {
 
 function setParkInfoLinks(data) {
   const infoEl = document.querySelector(".info");
-  const html = data.map(mediaCardTemplate);
-  infoEl.innerHTML = html.join("");
+  if (infoEl) {
+    infoEl.innerHTML = data.map(mediaCardTemplate).join("");
+  }
 }
 
 function footerTemplate(info) {
   const mailing = info.addresses.find((address) => address.type === "Mailing");
   const voice = info.contacts.phoneNumbers.find((n) => n.type === "Voice").phoneNumber;
-
   return `
     <section class="contact">
       <h3>Contact Info</h3>
@@ -96,31 +95,39 @@ function setFooter(data) {
 }
 
 async function init() {
-  const parkData = await getParkData("yell"); 
-  
+  const parkData = await getParkData("yell");
   const updatedLinks = getInfoLinks(parkData.images, parkInfoLinks);
-  
   setHeaderInfo(parkData);
   setParkIntro(parkData);
   setParkInfoLinks(updatedLinks);
   setFooter(parkData);
+  enableNavigation();
 }
 
 init();
 
-
 async function renderClimbingList() {
   const listEl = document.getElementById("outputList");
   if (!listEl) return;
-
   const data = await getJson("activities/parks?q=climbing");
   const parks = data.data[0].parks;
-
   listEl.innerHTML = parks
-    .map(
-      (park) => `<li><a href="${park.url}" target="_blank">${park.fullName}</a> (${park.states})</li>`
-    )
+    .map((park) => `<li><a href="${park.url}" target="_blank">${park.fullName}</a> (${park.states})</li>`)
     .join("");
 }
 
 renderClimbingList();
+
+function enableNavigation() {
+  const menuButton = document.querySelector("#global-nav-toggle");
+  const menu = document.querySelector(".global-nav");
+  menuButton.addEventListener("click", (ev) => {
+    let target = ev.target;
+    if (target.tagName !== "BUTTON") {
+      target = target.closest("button");
+    }
+    menu.classList.toggle("show");
+    const expanded = menu.classList.contains("show");
+    target.setAttribute("aria-expanded", expanded);
+  });
+}
