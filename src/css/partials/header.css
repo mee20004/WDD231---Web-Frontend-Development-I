@@ -19,17 +19,16 @@
   border-right: 13px solid transparent;
 }
 
-/* Global navbar styling */
+/* Global header styling */
 .global-header {
   background-color: var(--bs-black);
   color: white;
-  display: grid; /* Updated from flex to grid */
-  grid-template-columns: auto 200px; /* Specific sizing for the right side */
+  display: grid;
+  grid-template-columns: auto 200px;
   justify-content: space-between;
   fill: white;
 }
 
-/* Updated to include specific link states */
 .global-header a:link,
 .global-header a:visited,
 #park-header a:link,
@@ -46,7 +45,7 @@
 .global-header__right {
   display: flex;
   align-items: center;
-  justify-content: flex-end; /* Ensures content pushes to the right edge */
+  justify-content: flex-end;
 }
 
 .global-header__right .search-icon {
@@ -59,7 +58,7 @@
   border: none;
   color: white;
   font-size: 1rem;
-  cursor: pointer; /* Added cursor pointer */
+  cursor: pointer;
   padding: 1.2em;
   display: flex;
   align-items: center;
@@ -74,7 +73,7 @@
   border-top: 1px solid #333;
   max-height: 0;
   overflow: hidden;
-  transition: all 0.5s; /* Simplified transition */
+  transition: all 0.5s;
   background-color: #000;
 }
 
@@ -93,7 +92,7 @@
   --icon-color: white;
 }
 
-/* Styles to control opening and closing of menus */
+/* Opening and closing menu */
 .global-nav__toggle--closed {
   display: flex;
   align-items: center;
@@ -147,7 +146,7 @@
   font-size: 0.8rem;
 }
 
-/* Park nav styling */
+/* Park nav */
 .park-nav > ul {
   list-style: none;
   padding-left: 0;
