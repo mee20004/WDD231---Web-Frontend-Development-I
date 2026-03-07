@@ -92,6 +92,89 @@
   --icon-color: white;
 }
 
+.global-nav__section-heading {
+  margin-top: 0;
+  margin-bottom: 0;
+  padding: 1rem 0.625rem;
+  font-size: 1.25rem;
+}
+
+.section-heading--green {
+  color: var(--bs-light-green);
+}
+
+.section-heading--blue {
+  color: var(--bs-chathams-blue-3);
+}
+
+.global-nav__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #444;
+}
+
+.global-nav__split-button {
+  display: flex;
+  background-color: var(--bs-gray-800);
+}
+
+.global-nav__split-button > a {
+  flex: 1;
+  align-self: center;
+  padding: 1rem 0.625rem;
+  display: block;
+  color: white;
+}
+
+.global-nav__split-button > button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem 1.25rem;
+  border-left: 1px solid #444;
+}
+
+.global-nav__split-button > button:hover,
+.global-nav__split-button > a:hover {
+  background-color: var(--bs-gray-900);
+}
+
+.global-nav__split-button__toggle .icon {
+  transition: transform 0.3s ease;
+}
+
+.global-nav__split-button__toggle .icon.rotate {
+  transform: rotate(180deg);
+}
+
+.global-nav__submenu {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  font-size: 0.85rem;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.35s ease;
+}
+
+.global-nav__submenu.show {
+  max-height: 500px;
+  opacity: 1;
+}
+
+.global-nav__submenu a {
+  display: block;
+  padding: 1rem 0.625rem;
+  color: white;
+  text-decoration: none;
+}
+
+.global-nav__submenu a:hover {
+  text-decoration: underline;
+}
+
 /* Opening and closing menu */
 .global-nav__toggle--closed {
   display: flex;
@@ -172,4 +255,48 @@
 .park-nav svg {
   width: 24px;
   height: 24px;
+}
+
+/* Adjust global nav for wide screens */
+@media (min-width: 768px) {
+  /* Allow the menu to still collapse on wide screens when toggled */
+  .global-nav {
+    max-height: none;
+    overflow: visible;
+  }
+
+  .global-nav:not(.show) {
+    max-height: 0;
+    overflow: hidden;
+  }
+
+  .global-nav > h2,
+  .global-nav__list:first-of-type {
+    display: none;
+  }
+
+  .global-nav__list {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+  }
+
+  .global-nav__split-button {
+    background-color: inherit;
+  }
+
+  .global-nav__split-button > button {
+    display: none;
+  }
+
+  .global-nav__submenu {
+    display: flex;
+    flex-direction: column;
+    max-height: fit-content;
+    opacity: 1;
+  }
+
+  .global-nav__submenu a {
+    padding: 0.625rem;
+  }
 }

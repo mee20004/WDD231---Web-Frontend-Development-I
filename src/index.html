@@ -53,7 +53,7 @@
         </div>
 
         <nav class="global-nav">
-          <h2 class="global-nav__section-heading">Explore this Park</h2>
+          <h2 class="global-nav__section-heading section-heading--green">Explore this Park</h2>
           <ul class="global-nav__list">
             <li>
               <div class="global-nav__split-button">
@@ -65,11 +65,83 @@
                   </svg>
                 </button>
               </div>
-              <ul class="submenu">
+              <ul class="global-nav__submenu" aria-label="Plan Your Visit submenu">
                 <li><a href="#">Things to Do</a></li>
-                <li><a href="#">Maps & Directions</a></li>
+                <li><a href="#">Maps &amp; Directions</a></li>
                 <li><a href="#">Accessibility</a></li>
                 <li><a href="#">Guided Tours</a></li>
+              </ul>
+            </li>
+          </ul>
+
+          <h2 class="global-nav__section-heading section-heading--blue">Explore the National Park Service</h2>
+          <ul class="global-nav__list">
+            <li>
+              <div class="global-nav__split-button">
+                <a href="#">Plan Your Visit</a>
+                <button class="global-nav__split-button__toggle" aria-expanded="false">
+                  <span class="visually-hidden">Toggle submenu for Plan Your Visit</span>
+                  <svg class="icon" role="presentation" focusable="false">
+                    <use xlink:href="/images/sprite.symbol.svg#arrow"></use>
+                  </svg>
+                </button>
+              </div>
+              <ul class="global-nav__submenu" aria-label="Plan Your Visit submenu">
+                <li><a href="#">Find a Park</a></li>
+                <li><a href="#">Events</a></li>
+                <li><a href="#">Passes</a></li>
+                <li><a href="#">Trip Ideas</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="global-nav__split-button">
+                <a href="#">Learn &amp; Explore</a>
+                <button class="global-nav__split-button__toggle" aria-expanded="false">
+                  <span class="visually-hidden">Toggle submenu for Learn &amp; Explore</span>
+                  <svg class="icon" role="presentation" focusable="false">
+                    <use xlink:href="/images/sprite.symbol.svg#arrow"></use>
+                  </svg>
+                </button>
+              </div>
+              <ul class="global-nav__submenu" aria-label="Learn & Explore submenu">
+                <li><a href="#">Lesson Plans</a></li>
+                <li><a href="#">Books</a></li>
+                <li><a href="#">Educational Resources</a></li>
+                <li><a href="#">Virtual Tours</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="global-nav__split-button">
+                <a href="#">Get Involved</a>
+                <button class="global-nav__split-button__toggle" aria-expanded="false">
+                  <span class="visually-hidden">Toggle submenu for Get Involved</span>
+                  <svg class="icon" role="presentation" focusable="false">
+                    <use xlink:href="/images/sprite.symbol.svg#arrow"></use>
+                  </svg>
+                </button>
+              </div>
+              <ul class="global-nav__submenu" aria-label="Get Involved submenu">
+                <li><a href="#">Volunteer</a></li>
+                <li><a href="#">Donate</a></li>
+                <li><a href="#">Partner</a></li>
+                <li><a href="#">Jobs &amp; Careers</a></li>
+              </ul>
+            </li>
+            <li>
+              <div class="global-nav__split-button">
+                <a href="#">About NPS</a>
+                <button class="global-nav__split-button__toggle" aria-expanded="false">
+                  <span class="visually-hidden">Toggle submenu for About NPS</span>
+                  <svg class="icon" role="presentation" focusable="false">
+                    <use xlink:href="/images/sprite.symbol.svg#arrow"></use>
+                  </svg>
+                </button>
+              </div>
+              <ul class="global-nav__submenu" aria-label="About NPS submenu">
+                <li><a href="#">Our Mission</a></li>
+                <li><a href="#">History</a></li>
+                <li><a href="#">Leadership</a></li>
+                <li><a href="#">News</a></li>
               </ul>
             </li>
           </ul>
